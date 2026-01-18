@@ -1,0 +1,94 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.35.0.0
+Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Alexey Alexey, no, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.35.0.2
+Toolchain Path:  D:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.35.0.2
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Dialog DLL:      TCM.DLL V1.53.0.0
+ 
+<h2>Project:</h2>
+D:\Projects\STM\RTC\rtc.uvprojx
+Project File Date:  01/17/2026
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'STM32F103C8T6'
+compiling lcd.c...
+lcd.c(200): warning:  #223-D: function "sprintf" declared implicitly
+      sprintf(buffer, "Date:%02d/%02d/20%02d", 
+lcd.c: 1 warning, 0 errors
+compiling delay.c...
+compiling gpio.c...
+compiling main.c...
+compiling keyboard.c...
+keyboard.c(32): warning:  #47-D: incompatible redefinition of macro "KEY_ENTER"  (declared at line 19 of "keyboard.h")
+  #define KEY_ENTER  3
+keyboard.c(33): warning:  #47-D: incompatible redefinition of macro "KEY_ESC"  (declared at line 20 of "keyboard.h")
+  #define KEY_ESC    4
+keyboard.c(169): warning:  #223-D: function "sprintf" declared implicitly
+              sprintf(buffer, "%02d:%02d:%02d", 
+keyboard.c(238): warning:  #223-D: function "sprintf" declared implicitly
+                  sprintf(buffer, "%02d:%02d:%02d", 
+keyboard.c(244): warning:  #223-D: function "sprintf" declared implicitly
+                  sprintf(buffer, "%02d:%02d:%02d", 
+keyboard.c: 5 warnings, 0 errors
+assembling startup_stm32f10x_md.s...
+compiling scheduler.c...
+compiling rtc.c...
+rtc.c(132): warning:  #550-D: variable "time_data"  was set but never used
+      uint32_t counter, date_data, time_data;
+rtc.c: 1 warning, 0 errors
+compiling i2c.c...
+compiling uart.c...
+compiling system_stm32f10x.c...
+linking...
+Program Size: Code=8956 RO-data=560 RW-data=32 ZI-data=1712  
+".\Objects\rtc.axf" - 0 Error(s), 7 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.8.0.pack
+                ARM.CMSIS.5.8.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.5.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\Device\STM32F103C8
+  .\RTE\_STM32F103C8T6
+  D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include
+  D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.5.0
+
+   * Component: Keil::Device:Startup:1.0.0
+      Include file:  RTE_Driver\Config\RTE_Device.h
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\system_stm32f10x.c
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

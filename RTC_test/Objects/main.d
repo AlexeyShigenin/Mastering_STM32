@@ -1,0 +1,13 @@
+.\objects\main.o: main.c
+.\objects\main.o: D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\stm32f10x.h
+.\objects\main.o: .\RTE\_STM32F103C8T6\RTE_Components.h
+.\objects\main.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h
+.\objects\main.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h
+.\objects\main.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
+.\objects\main.o: D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h
+.\objects\main.o: Core/sysinit.h
+.\objects\main.o: Core/i2c.h
+.\objects\main.o: Core/lcd.h
+.\objects\main.o: Core/delay.h
