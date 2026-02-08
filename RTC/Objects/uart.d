@@ -11,4 +11,3 @@
 .\objects\uart.o: D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h
 .\objects\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

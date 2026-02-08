@@ -9,5 +9,7 @@
 .\objects\keyboard.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
 .\objects\keyboard.o: D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h
 .\objects\keyboard.o: lcd.h
+.\objects\keyboard.o: scheduler.h
 .\objects\keyboard.o: rtc.h
 .\objects\keyboard.o: uart.h
+.\objects\keyboard.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

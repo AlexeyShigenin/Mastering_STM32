@@ -1,25 +1,20 @@
 /**
   ******************************************************************************
-  * @file    i2c.h
-  * @brief   Заголовочный файл для модуля I2C
+  * @file			i2c.h
+  * @brief		Заголовочный файл модуля Функций для работы с I2C
+	* @author		Алексей Шигенин
   ******************************************************************************
   */
 
-#ifndef __I2C_H
-#define __I2C_H
+#ifndef I2C_H
+#define I2C_H
 
-#include <stdint.h>
+#include "stm32f10x.h"
 
-/* Адрес PCF8574T по умолчанию (A0-A2 = 0) */
-#define PCF8574_ADDRESS 0x4E
+void i2cInit(void);											// Инициализация интерфейса I2C
+void i2c_start(void);										// Генерация условия START
+void i2c_stop(void);										// Генерация условия STOP
+void i2c_write(uint8_t); 								// Запись байта данных
+void i2c_write_byte(uint8_t, uint8_t);	// Запись байта данных по адресу
 
-/* Прототипы функций */
-void i2c_init(void);
-void i2c_start(void);
-void i2c_stop(void);
-void i2c_write(uint8_t data);
-uint8_t i2c_read_ack(void);
-uint8_t i2c_read_nack(void);
-void i2c_write_byte(uint8_t addr, uint8_t data);
-
-#endif /* __I2C_H */
+#endif	/* I2C_H */

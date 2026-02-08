@@ -1,0 +1,10 @@
+.\objects\sysinit.o: sysinit.c
+.\objects\sysinit.o: sysinit.h
+.\objects\sysinit.o: D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\stm32f10x.h
+.\objects\sysinit.o: .\RTE\_STM32F103C8T6\RTE_Components.h
+.\objects\sysinit.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h
+.\objects\sysinit.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\sysinit.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h
+.\objects\sysinit.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h
+.\objects\sysinit.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
+.\objects\sysinit.o: D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h

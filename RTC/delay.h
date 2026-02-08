@@ -1,17 +1,17 @@
 /**
   ******************************************************************************
-  * @file    delay.h
-  * @brief   Заголовочный файл для модуля задержек
+  * @file			delay.h
+  * @brief		Заголовочный файл модуля задержек
+	* @author		Алексей Шигенин
   ******************************************************************************
   */
 
-#ifndef __DELAY_H
-#define __DELAY_H
+#ifndef DELAY_H
+#define DELAY_H
 
 #include <stdint.h>
 
-/* Прототипы функций */
-void delay_ms(uint32_t ms);
-void delay_us(uint32_t us);
+void delay_ms(uint32_t ms);					// Задержка в миллисекундах
+void delay_us(uint32_t us);					// Задержка в микросекундах
 
-#endif /* __DELAY_H */
+#endif /* DELAY_H */

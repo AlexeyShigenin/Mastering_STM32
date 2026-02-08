@@ -13,6 +13,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "gpio.h"
 
+
 extern ScheduleTypeDef device_schedule;
 
 /* Текущее состояние устройства */

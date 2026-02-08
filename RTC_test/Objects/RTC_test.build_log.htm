@@ -22,20 +22,21 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 D:\Projects\STM32\RTC_test\RTC_test.uvprojx
-Project File Date:  01/17/2026
+Project File Date:  02/07/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'STM32F103C8T6'
 assembling startup_stm32f10x_md.s...
-compiling sysinit.c...
-compiling delay.c...
+compiling i2c.c...
 compiling main.c...
 compiling system_stm32f10x.c...
+compiling delay.c...
 compiling lcd.c...
-compiling i2c.c...
+compiling sysinit.c...
+compiling rtc.c...
 linking...
-Program Size: Code=1604 RO-data=252 RW-data=0 ZI-data=1632  
+Program Size: Code=3800 RO-data=296 RW-data=20 ZI-data=1668  
 ".\Objects\RTC_test.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -63,11 +64,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.5.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\system_stm32f10x.c
-      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
-      Include file:  RTE_Driver\Config\RTE_Device.h
       Source file:   Device\Source\ARM\startup_stm32f10x_md.s
-Build Time Elapsed:  00:00:00
+      Include file:  RTE_Driver\Config\RTE_Device.h
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\system_stm32f10x.c
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

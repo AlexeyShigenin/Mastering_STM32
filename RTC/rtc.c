@@ -129,7 +129,7 @@ void RTC_SetDateTime(RTC_TimeTypeDef* time, RTC_DateTypeDef* date) {
   * @retval None
   */
 void RTC_GetDateTime(RTC_TimeTypeDef* time, RTC_DateTypeDef* date) {
-    uint32_t counter, date_data, time_data;
+    uint32_t counter, date_data;
     
     // Ожидание флага завершения операции
     while (!(RTC->CRL & RTC_CRL_RTOFF));
@@ -161,11 +161,6 @@ void RTC_GetDateTime(RTC_TimeTypeDef* time, RTC_DateTypeDef* date) {
         date->day = 1;
         date->weekday = 1;
     }
-    
-    // Чтение времени из BKP_DR2 (для проверки)
-    PWR->CR |= PWR_CR_DBP;
-    time_data = BKP->DR2;
-    PWR->CR &= ~PWR_CR_DBP;
     
     // Восстановление расписания из резервных регистров
     if (BKP->DR5 != 0) {

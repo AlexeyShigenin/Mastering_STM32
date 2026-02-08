@@ -27,11 +27,13 @@
 #include "scheduler.h"
 #include "gpio.h"
 #include "delay.h"
+#include "sysinit.h"
 #include <string.h>
 
 /* Глобальные переменные */
 volatile uint8_t system_mode = 0;  // 0: нормальный режим, 1: установка времени, 2: установка расписания
 volatile uint8_t menu_position = 0; // Позиция в меню
+
 RTC_TimeTypeDef current_time;
 RTC_DateTypeDef current_date;
 
@@ -49,40 +51,6 @@ void delay_ms_simple(uint32_t ms) {
 }
 
 /**
-  * @brief  Инициализация системного тактирования
-  * @param  None
-  * @retval None
-  */
-void SystemClock_Config(void) {
-    // Включение HSE (8 МГц)
-    RCC->CR |= RCC_CR_HSEON;
-    while (!(RCC->CR & RCC_CR_HSERDY));
-    
-    // Настройка FLASH
-    FLASH->ACR |= FLASH_ACR_PRFTBE;
-    FLASH->ACR &= ~FLASH_ACR_LATENCY;
-    FLASH->ACR |= FLASH_ACR_LATENCY_2;
-    
-    // Настройка PLL (умножение на 9 = 72 МГц)
-    RCC->CFGR |= RCC_CFGR_PLLSRC;
-    RCC->CFGR &= ~RCC_CFGR_PLLMULL;
-    RCC->CFGR |= RCC_CFGR_PLLMULL9;
-    
-    // Включение PLL
-    RCC->CR |= RCC_CR_PLLON;
-    while (!(RCC->CR & RCC_CR_PLLRDY));
-    
-    // Выбор PLL как источника SYSCLK
-    RCC->CFGR |= RCC_CFGR_SW_PLL;
-    while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
-    
-    // Настройка делителей
-    RCC->CFGR |= RCC_CFGR_HPRE_DIV1;    // AHB = 72 МГц
-    RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;   // APB1 = 36 МГц
-    RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;   // APB2 = 72 МГц
-}
-
-/**
   * @brief  Обработчик SysTick (1 мс)
   * @param  None
   * @retval None
@@ -96,12 +64,14 @@ void SysTick_Handler(void) {
         keyboard_scan();
     }
     
-    // Обновление дисплея каждые 500 мс
+       // Обновление дисплея каждые 500 мс
     if (tick_counter % 500 == 0) {
         if (system_mode == 0) {
             RTC_GetDateTime(&current_time, &current_date);
             lcd_update_time(&current_time, &current_date);
+            
             uart_send_time(&current_time, &current_date);
+            
         }
         
         // Проверка расписания
@@ -137,7 +107,7 @@ void USART1_IRQHandler(void) {
   */
 int main(void) {
     // Настройка тактирования
-    SystemClock_Config();
+    sysClockTo72();
     
     // Настройка SysTick (1 мс)
     SysTick_Config(72000);
@@ -145,11 +115,11 @@ int main(void) {
     // Инициализация периферии
     gpio_init();
     rtc_init();
-    uart_init();
-    i2c_init();
+    i2cInit();
     lcd_init();
     keyboard_init();
     scheduler_init();
+		uart_init();
     
     // Включение прерываний
     __enable_irq();

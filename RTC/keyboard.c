@@ -18,6 +18,7 @@
 #include "lcd.h"
 #include "rtc.h"
 #include "uart.h"
+#include <stdio.h>
 
 /* Внешние переменные */
 extern volatile uint8_t system_mode;
@@ -26,11 +27,12 @@ extern RTC_TimeTypeDef current_time;
 extern RTC_DateTypeDef current_date;
 extern ScheduleTypeDef device_schedule;
 
-/* Коды кнопок (изменены для 4 кнопок) */
-#define KEY_UP     1
-#define KEY_DOWN   2
-#define KEY_ENTER  3
-#define KEY_ESC    4
+/* Коды кнопок для 4-кнопочной клавиатуры */
+#define KEY_NONE     0
+#define KEY_UP       1    // PA0
+#define KEY_DOWN     2    // PA1
+#define KEY_ENTER    3    // PA2
+#define KEY_ESC      4    // PA3
 
 /* Переменные для обработки клавиатуры */
 static uint8_t last_key_state = 0;

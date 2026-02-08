@@ -8,6 +8,7 @@
 .\objects\lcd.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h
 .\objects\lcd.o: D:\Keil_v5\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
 .\objects\lcd.o: D:\Keil_v5\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h
+.\objects\lcd.o: Core\rtc.h
 .\objects\lcd.o: Core\i2c.h
 .\objects\lcd.o: Core\delay.h
-.\objects\lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -2,7 +2,6 @@
 	******************************************************************************
 	* @file			sysint.c
 	* @brief		Инициализация системы
-	* @author		Алексей Шигенин
 	******************************************************************************
 	*/
 
@@ -16,7 +15,7 @@
 	******************************************************************************
 	*/
 void sysClockTo72(void){
-	// 1.	Включение HSE - в регистр RCC_CR (ResetClockControl_ControlRegister)
+	// 1.	Включение HSE - в регистре RCC_CR (ResetClockControl_ControlRegister)
 	//		устанавливаем бит RCC_CR_HSEON (HighSpeedExternalON)
 	RCC->CR |= RCC_CR_HSEON;
 	// 		Ожидаем готовность HSE - ждем установку флага
@@ -29,7 +28,6 @@ void sysClockTo72(void){
 	//		FLASH_ACR_PRFTBE (PReFeTchBufferEnable) в регистре FLASH_ACR
 	FLASH->ACR &= ~FLASH_ACR_PRFTBE;
 	// 		Запускаем буфер предварительной выборки - устанавливаем бит
-	//		FLASH_ACR_PRFTBE (PReFeTchBufferEnable) в регистре FLASH_ACR
 	FLASH->ACR |= FLASH_ACR_PRFTBE;
 	// 		Настраиваем битовое поле управления задержкой
 	//		(биты LATENCY (0-2) в регистре FLASH_ACR)
@@ -92,5 +90,9 @@ void sysClockTo72(void){
 	//		тактирования (RCC_CFGR_SWS, RCC_CFGR_SWS_PLL - флаги статуса
 	//		переключателя (SWitchStatus) источника тактирования)
 	// 		ожидаем, пока RCC_CFGR_SWS не установятся аппаратно в RCC_CFGR_SWS_PLL
-	while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
+	while((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL){}
+		
+	// Обновляем SystemCoreClock
+	SystemCoreClock = 72000000;
+
 }

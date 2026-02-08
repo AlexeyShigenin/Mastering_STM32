@@ -18,7 +18,6 @@
 #include "stm32f10x.h"                  // Device header
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 /* Глобальные переменные для буфера команд */
 static char uart_buffer[UART_BUFFER_SIZE];
@@ -111,8 +110,9 @@ void uart_send_time(RTC_TimeTypeDef* time, RTC_DateTypeDef* date) {
     sprintf(buffer, "Date: %02d/%02d/20%02d Time: %02d:%02d:%02d\r\n",
             date->day, date->month, date->year,
             time->hours, time->minutes, time->seconds);
-    
-    uart_send_string(buffer);
+	
+		uart_send_string(buffer);
+	
 }
 
 /**

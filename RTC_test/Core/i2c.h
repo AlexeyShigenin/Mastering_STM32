@@ -11,10 +11,18 @@
 
 #include "stm32f10x.h"
 
+// Константа, определяющая направление (младший бит первого байта в I2C: 0 — запись)
+#define I2C_REQUEST_WRITE			0x00
+// Константа, определяющая направление (младший бит первого байта в I2C: 1 — чтение)
+#define I2C_REQUEST_READ			0x01
+
+#define I2C_OWNADDRESS1_7BIT	0x00004000U
+#define I2C_MODE_I2C					0x00000000U
+
 void i2cInit(void);											// Инициализация интерфейса I2C
-void i2c_start(void);										// Генерация условия START
-void i2c_stop(void);										// Генерация условия STOP
-void i2c_write(uint8_t); 								// Запись байта данных
-void i2c_write_byte(uint8_t, uint8_t);	// Запись байта данных по адресу
+void i2cStart(void);										// Генерация условия START
+void i2cStop(void);											// Генерация условия STOP
+void i2cWrite(uint8_t); 								// Запись байта данных
+void i2cWriteByte(uint8_t, uint8_t);		// Запись байта данных по адресу
 
 #endif	/* I2C_H */

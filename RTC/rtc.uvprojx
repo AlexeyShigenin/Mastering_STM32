@@ -512,6 +512,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Sysinit</GroupName>
+          <Files>
+            <File>
+              <FileName>sysinit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sysinit.c</FilePath>
+            </File>
+            <File>
+              <FileName>sysinit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sysinit.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>

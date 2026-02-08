@@ -11,8 +11,9 @@
 .\objects\main.o: uart.h
 .\objects\main.o: i2c.h
 .\objects\main.o: lcd.h
-.\objects\main.o: keyboard.h
 .\objects\main.o: scheduler.h
+.\objects\main.o: keyboard.h
 .\objects\main.o: gpio.h
 .\objects\main.o: delay.h
+.\objects\main.o: sysinit.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
