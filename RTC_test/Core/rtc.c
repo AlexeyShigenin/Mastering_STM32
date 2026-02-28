@@ -8,9 +8,12 @@
 #include "stm32f10x.h"                  // Device header
 #include "lcd.h"
 
-RTCTimeDate currentTime;
-/* Глобальная структура для хранения расписания */
+extern uint8_t currentState;
+extern uint8_t displayPage;
+
+// Глобальная структура для хранения расписания
 ScheduleTypeDef deviceSchedule = {0};
+RTCTimeDate currentTime = {0};
 
 // Инициализация источника тактирования RTC
 void RTCInitClockSource(void) {
@@ -81,17 +84,35 @@ void rtcInit(void) {
         // Ожидание завершения операции
         while(!(RTC->CRL & RTC_CRL_RTOFF));
         
-        // 3.4. Установка начального времени (опционально)
-        RTCTimeDate initialTime = {
-        .seconds = 0,
-        .minutes = 27,
-        .hours = 23,
-        .day = 23,
-        .month = 1,
-        .year = 2026,
-        .weekday = 5
-    };
-        RTCSetTimeDate(&initialTime);
+        // 3.4. Инициализация начального времени и расписания (опционально)
+        RTCTimeDate initialTime = {0};
+        
+				initialTime.seconds = 0;
+        initialTime.minutes = 0;
+        initialTime.hours = 0;
+        initialTime.day = 1;
+        initialTime.month = 3;
+        initialTime.year = 2026;
+        initialTime.weekday = 7;
+				
+				RTCSetTimeDate(&initialTime);
+		
+				// Инициализация начального расписания
+        initialTime.seconds = 0;
+        initialTime.minutes = 0;
+        initialTime.hours = 0;
+        initialTime.day = 1;
+        initialTime.month = 1;
+        initialTime.year = 2026;
+				schedulerSetOnTime(&initialTime);
+				
+        initialTime.seconds = 0;
+        initialTime.minutes = 10;
+        initialTime.hours = 0;
+        initialTime.day = 1;
+        initialTime.month = 1;
+        initialTime.year = 2026;
+				schedulerSetOffTime(&initialTime);
         
         // 3.5. Установка флага инициализации в резервный регистр
         BKP->DR1 = 0x5A5A;  // Флаг успешной инициализации
@@ -100,9 +121,18 @@ void rtcInit(void) {
         RTC->CRL &= ~(RTC_CRL_SECF | RTC_CRL_ALRF | RTC_CRL_OWF);
     }
     else {
-        /* RTC уже был инициализирован - проверяем и корректируем настройки */
+			/* RTC уже был инициализирован - проверяем и корректируем настройки */
+			
+			// Чтение настроек расписания из BKP регистров
+			deviceSchedule.secondsOn = ((BKP->DR4 << 16) | BKP->DR3);
+			deviceSchedule.secondsOff = ((BKP->DR6 << 16) | BKP->DR5);
+			
+			RTCConvertFromSeconds(deviceSchedule.secondsOn, &deviceSchedule.onTime);
+			RTCConvertFromSeconds(deviceSchedule.secondsOff, &deviceSchedule.offTime);
         
-//        // 3.7. Проверка, запущен ли RTC
+//        
+			
+			// 3.7. Проверка, запущен ли RTC
 //        if(!(RCC->BDCR & RCC_BDCR_RTCEN)) {
 //            // RTC отключен - включаем его
 //            RCC->BDCR |= RCC_BDCR_RTCEN;
@@ -138,6 +168,8 @@ void rtcInit(void) {
 //        // 3.10. Синхронизация с RTC
 //        RTC->CRL &= ~RTC_CRL_RSF;
 //        while(!(RTC->CRL & RTC_CRL_RSF));
+
+
     }
     
     // 4. Настройка прерываний RTC (всегда, т.к. при сбросе основного ядра настройки прерываний сбрасываются)
@@ -162,8 +194,11 @@ void RTC_IRQHandler(void) {
     // Проверка флага секунды
     if(RTC->CRL & RTC_CRL_SECF) {
 			// Здесь можно обновить отображение времени
-			//RTCGetTimeDate(&currentTime);	// Получение текущего времени
-			//lcdUpdateTime(&currentTime);	// Обновление времени на индикаторе
+			if (currentState == 0 && displayPage == 0){
+				RTCGetTimeDate(&currentTime);	// Получение текущего времени
+				lcdUpdateTime(&currentTime);	// Обновление времени на дисплее
+			}
+			schedulerCheck(); 
 			
         // Сброс флага секунды
         RTC->CRL &= ~RTC_CRL_SECF;
@@ -209,7 +244,7 @@ void RTCSetTimeDate(RTCTimeDate *td) {
 }
 
 // Получение текущего времени и даты
-void RTCGetTimeDate(RTCTimeDate *td) {
+void RTCGetTimeDate(RTCTimeDate* td) {
     uint32_t seconds;
     
     // Ожидание синхронизации регистров
@@ -220,6 +255,9 @@ void RTCGetTimeDate(RTCTimeDate *td) {
     do {
         seconds = (RTC->CNTH << 16) | RTC->CNTL;
     } while(seconds != ((RTC->CNTH << 16) | RTC->CNTL));
+		
+		// Сохранение текущего времени в секундах в структуре расписания для последующей проверки
+		deviceSchedule.secondsCurrent = seconds;
     
     // Конвертация секунд во время и дату
     RTCConvertFromSeconds(seconds, td);

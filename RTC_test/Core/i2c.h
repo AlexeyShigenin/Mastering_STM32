@@ -19,6 +19,7 @@
 #define I2C_OWNADDRESS1_7BIT	0x00004000U
 #define I2C_MODE_I2C					0x00000000U
 
+/* Прототипы функций */
 void i2cInit(void);											// Инициализация интерфейса I2C
 void i2cStart(void);										// Генерация условия START
 void i2cStop(void);											// Генерация условия STOP

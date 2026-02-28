@@ -24,6 +24,7 @@
 	*/
 #ifdef DWT_DELAY_ENABLE
 
+/* Прототипы функций */
 void DWTDelay_Init(void);							// Инициализация DWT
 
 uint32_t getDWTCountDelay(void);			// Получение текущего значения счетчика
@@ -80,6 +81,7 @@ while (1) {
 
 static volatile uint32_t countDelay;
 
+/* Прототипы функций */
 void SysTickDelay_Init(void);					// Инициализация SysTick
 
 void SysTick_Handler(void);						// Обработчик прерываний SysTick

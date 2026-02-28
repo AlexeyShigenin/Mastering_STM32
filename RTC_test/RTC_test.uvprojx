@@ -444,6 +444,36 @@
               <FileType>5</FileType>
               <FilePath>.\Core\rtc.h</FilePath>
             </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Core\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Core\gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>scheduler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Core\scheduler.c</FilePath>
+            </File>
+            <File>
+              <FileName>scheduler.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Core\scheduler.h</FilePath>
+            </File>
+            <File>
+              <FileName>matrix_keyboard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Core\matrix_keyboard.c</FilePath>
+            </File>
+            <File>
+              <FileName>matrix_keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Core\matrix_keyboard.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

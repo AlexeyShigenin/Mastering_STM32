@@ -21,14 +21,18 @@ typedef struct {
     uint8_t weekday;
 } RTCTimeDate;
 
-/* Структура для расписания */
+/* Структура для хранения расписания */
 typedef struct {
-    uint8_t enabled;
-    RTCTimeDate on_time;
-    RTCTimeDate off_time;
+	RTCTimeDate onTime;
+	RTCTimeDate offTime;
+	uint32_t secondsOn;
+	uint32_t secondsOff;
+	uint32_t secondsCurrent;
+	
 } ScheduleTypeDef;
 
-/* Функции модуля */
+
+/* Прототипы функций */
 void rtcInit(void);											// Инициализация RTC
 void RTCSetTimeDate(RTCTimeDate *td);
 void RTCGetTimeDate(RTCTimeDate *td);

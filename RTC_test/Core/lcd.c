@@ -10,6 +10,8 @@
 
 #include "lcd.h"
 
+extern int keyPress;
+
 /*******************************************************************************
 	* @brief  Отправка полубайта (4 бита) на LCD
 	* @param  data: данные (нижние 4 бита)
@@ -54,14 +56,14 @@ static void lcdSendNibble(uint8_t data, uint8_t rs) {
 	i2cWriteByte(LCD_ADDRESS, control | LCD_E_PIN);
 	
 	// 2. Пауза > 450 нс
-	delayDWT_ms(1);
+	delayDWT_us(500);
 	
 	// 3. Отправляем байт без бита E (устанавливаем E в 0)
 	// Это создает спад импульса, по которому LCD защелкивает данные
 	i2cWriteByte(LCD_ADDRESS, control);
 	
 	// Пауза для стабилизации
-	delayDWT_ms(1);
+	delayDWT_us(500);
 }
 
 /*******************************************************************************
@@ -87,9 +89,9 @@ static void lcdWrite4Bits(uint8_t data, uint8_t rs) {
 void lcdSendCommand(uint8_t cmd) {
     lcdWrite4Bits(cmd, 0);
     if (cmd == LCD_CLEAR_DISPLAY || cmd == LCD_RETURN_HOME) {
-        delayDWT_ms(6);
+        delayDWT_ms(3);
     } else {
-        delayDWT_ms(6);
+        delayDWT_ms(3);
 		}
 }
 
@@ -112,6 +114,26 @@ void lcdSendData(uint8_t data) {
 	*/
 void lcdClear(void) {
     lcdSendCommand(LCD_CLEAR_DISPLAY);
+}
+
+/*******************************************************************************
+  * @brief  Включение курсора
+  * @param  None
+  * @retval None
+	******************************************************************************
+	*/
+void lcdCursorOn(void) {
+    lcdSendCommand(LCD_DISPLAY_CONTROL | LCD_DISPLAY_ON | LCD_CURSOR_OFF | LCD_BLINK_ON);
+}
+
+/*******************************************************************************
+  * @brief  Выключение курсора
+  * @param  None
+  * @retval None
+	******************************************************************************
+	*/
+void lcdCursorOff(void) {
+    lcdSendCommand(LCD_DISPLAY_CONTROL | LCD_DISPLAY_ON | LCD_CURSOR_OFF | LCD_BLINK_OFF);
 }
 
 /*******************************************************************************
@@ -217,17 +239,24 @@ void lcdInit(void) {
 	******************************************************************************
 	*/
 void lcdUpdateTime(RTCTimeDate* time) {
-    char buffer[17];
+	char buffer[17];
+	// Первая строка: дата
+	lcdSetCursor(0, 0);
+	sprintf(buffer, "%02d/%02d/%04d% 02d %s", 
+            time->day, time->month, time->year, time->weekday, getSchedulerState() ? "ON " : "OFF");
+	lcdPrintString(buffer);
+//	// Добавление информации о состоянии планировщика
+//	lcdSetCursor(0, 13);
+//	getSchedulerState() ? lcdPrintString("ON ") : lcdPrintString("OFF");
     
-    // Первая строка: дата
-    lcdSetCursor(0, 0);
-    sprintf(buffer, "%02d/%02d/%04d% 02d", 
-            time->day, time->month, time->year, time->weekday);
-    lcdPrintString(buffer);
-    
-    // Вторая строка: время
-    lcdSetCursor(1, 0);
-    sprintf(buffer, "%02d:%02d:%02d", 
-            time->hours, time->minutes, time->seconds);
-    lcdPrintString(buffer);
+	// Вторая строка: время
+	lcdSetCursor(1, 0);
+	sprintf(buffer, "%02d:%02d:%02d     %s", 
+            time->hours, time->minutes, time->seconds, getDeviceState() ? "ON " : "OFF");
+	lcdPrintString(buffer);
+	
+//	// Добавление информации о состоянии устройства
+//	lcdSetCursor(1, 13);
+//	getDeviceState() ? lcdPrintString("ON ") : lcdPrintString("OFF");
+	
 }

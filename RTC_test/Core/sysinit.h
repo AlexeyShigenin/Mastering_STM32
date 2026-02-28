@@ -8,6 +8,7 @@
 #ifndef SYSINIT_H
 #define SYSINIT_H
 
+/* Прототипы функций */
 void sysClockTo72(void);	// Настройка тактирования на частоту 72 МГц
 
 #endif	/* SYSINIT_H */

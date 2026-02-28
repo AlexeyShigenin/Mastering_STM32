@@ -9,7 +9,7 @@
 #define LCD_H
 
 #include "stm32f10x.h"
-#include "rtc.h"
+#include "scheduler.h"
 #include "i2c.h"
 #include "delay.h"
 #include <stdio.h>
@@ -58,7 +58,7 @@ static void lcdWrite4Bits(uint8_t data, uint8_t rs);
 #define LCD_5x10_DOTS        0x04
 #define LCD_5x8_DOTS         0x00
 
-// Биты управления (схема подключения PCF8574T к LCD)
+/* Биты управления (схема подключения PCF8574T к LCD) */
 #define LCD_RS_PIN 0x01  // P0: Register Select (1 - данные, 0 - команда)
 #define LCD_RW_PIN 0x02  // P1: Read/Write (1 - чтение, 0 - запись)
 #define LCD_E_PIN  0x04  // P2: Вход тактовых импульсов (строб)
@@ -68,14 +68,16 @@ static void lcdWrite4Bits(uint8_t data, uint8_t rs);
 #define LCD_D6_PIN 0x40  // P6: Data bit 6
 #define LCD_D7_PIN 0x80  // P7: Data bit 7
 
-
+/* Прототипы функций */
 void lcdInit(void);												// Инициализация LCD
 //void lcdSendCommand(uint8_t);						// Отправка команды на LCD
 //void lcdSend_Data(uint8_t);							// Отправка данных на LCD
 void lcdSetCursor(uint8_t, uint8_t);			// Установка позиции курсора
-//void lcdPrintChar(char c);							// Вывод символа
+void lcdPrintChar(char c);								// Вывод символа
 void lcdPrintString(const char*);					// Вывод строки
 void lcdClear(void);											// Очистка дисплея
+void lcdCursorOn(void);										// Включение курсора
+void lcdCursorOff(void);									// Выключение курсора
 // Обновление времени на дисплее
 void lcdUpdateTime(RTCTimeDate*);
 
